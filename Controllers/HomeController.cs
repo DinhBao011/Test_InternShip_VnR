@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,29 +12,20 @@ namespace Test_VnR.Controllers
         VNR_InternShipEntities db = new VNR_InternShipEntities();
         public ActionResult Index()
         {
-            var courseList = db.KhoaHocs.ToList();
-            return View(courseList);
+            var dsKhoaHoc = db.KhoaHocs.ToList();
+            return View(dsKhoaHoc);
         }
 
-        public ActionResult choose_Frontend_Option(int id)
+        public ActionResult chon_Khoa_Hoc_Chi_Tiet(int id, string viewName)
         {
-            ViewBag.KhoaHoc = db.KhoaHocs.FirstOrDefault(c => c.ID == id).TenKhoaHoc;
-            var subjectList = db.MonHocs.Where(p => p.KhoaHocID == id).ToList();
-            return View(subjectList);
-        }
-
-        public ActionResult choose_BackEnd_Option(int id)
-        {
-            ViewBag.KhoaHoc = db.KhoaHocs.FirstOrDefault(c => c.ID == id).TenKhoaHoc;
-            var subjectList = db.MonHocs.Where(p => p.KhoaHocID == id).ToList();
-            return View(subjectList);
-        }
-
-        public ActionResult choose_DotnetCore_Option(int id)
-        {
-            ViewBag.KhoaHoc = db.KhoaHocs.FirstOrDefault(c => c.ID == id).TenKhoaHoc;
-            var subjectList = db.MonHocs.Where(p => p.KhoaHocID == id).ToList();
-            return View(subjectList);
+            var khoaHoc = db.KhoaHocs.FirstOrDefault(c => c.ID == id);
+            if (khoaHoc == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.KhoaHoc = khoaHoc.TenKhoaHoc;
+            var dsMonHoc = db.MonHocs.Where(p => p.KhoaHocID == id).ToList();
+            return View(viewName, dsMonHoc);
         }
 
     }
