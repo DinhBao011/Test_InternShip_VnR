@@ -1,0 +1,12 @@
+﻿﻿@model IEnumerable<Test_VnR.Models.KhoaHoc>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div>
+    <h1>Tất cả khóa học</h1>
+
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("choose_Frontend_Option", "Home", new { id = item.ID })" class="list-group-item list-group-item-action">  @item.TenKhoaHoc</a>
+    }
+</div>

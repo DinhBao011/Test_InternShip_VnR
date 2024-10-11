@@ -1,0 +1,14 @@
+﻿﻿@model IEnumerable<Test_VnR.Models.MonHoc>
+@{
+    ViewBag.Title = "choose_BackEnd_Option";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <h3>
+        @item.TenMonHoc
+    </h3>
+}
+
+
